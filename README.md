@@ -16,3 +16,12 @@ void (^thisBlock)(void) = ^(void) {
     // self pointer is released when the block ends
 };
 ```
+
+### Checking for Pad vs. Phone
+
+For use when conditionally using iPad-specific features such as UISplitViewController.
+
+```objectivec
+#define IS_PAD [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
+#define IS_PHONE [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
+```
