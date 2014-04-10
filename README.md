@@ -25,3 +25,37 @@ For use when conditionally using iPad-specific features such as UISplitViewContr
 #define IS_PAD [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
 #define IS_PHONE [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
 ```
+
+### Pushing work to main thread with a block
+
+iOS 7:
+
+```objectivec
+NSUrl *url = @"http://some-url";
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *task = [session dataTaskWithURL:url
+                                    completionHandler:^(NSData *data,
+                                                        NSURLResponse *response,
+                                                        NSError *error) {
+                                        UIImage *img = [UIImage imageFromData:data];
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            // code
+                                        });
+                                    }];
+[task resume];
+```
+
+Incomplete, old style operation queue:
+
+```objectivec
+NSURL *url = @"http://some-url";
+NSURLRequest *request = [NSURLRequest requestWithURL:url];
+[NSURLConnection sendAsynchronousRequest:request
+                                   queue:[NSOperationQueue mainQueue]
+                                    completionHandler:^(NSURLResponse *response,
+                                                        NSData *data,
+                                                        NSError *error) {
+                                        
+                                    }];
+```
+
