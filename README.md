@@ -63,3 +63,11 @@ NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
 * Parents add children
 * Children remove themselves from the parent
+
+### Thread safe static initialization
+
+```objectivec
+static NSMutableDictionary *downloadTasks = nil;
+static dispatch_once_t onceToken;
+dispatch_once(&onceToken, ^{ downloadTasks = [NSMutableDictionary dictionary]; });
+```
