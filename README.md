@@ -59,7 +59,7 @@ NSURLRequest *request = [NSURLRequest requestWithURL:url];
                                     }];
 ```
 
-## ViewController hierarchy
+### ViewController hierarchy
 
 * Parents add children
 * Children remove themselves from the parent
