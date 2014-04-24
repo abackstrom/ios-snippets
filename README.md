@@ -19,11 +19,12 @@ void (^thisBlock)(void) = ^(void) {
 
 ### Checking for Pad vs. Phone
 
-For use when conditionally using iPad-specific features such as UISplitViewController.
+Use `UI_USER_INTERFACE_IDIOM` to conditionally use iPad-specific features such as UISplitViewController.
 
 ```objectivec
-#define IS_PAD [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
-#define IS_PHONE [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
+if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    // ...
+}
 ```
 
 ### Pushing work to main thread with a block
